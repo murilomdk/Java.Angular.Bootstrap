@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>cliente</title>
+	<script src="js/angular.js"></script>
+	<script type="text/javascript" src="js/clientes.js"></script>
+	<link rel="stylesheet" href="css/estilos.css" />
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+	
+	<style type="text/css">
+		button {
+			width: 80px;
+		}
+		
+		input {
+			width: 100%; 
+		}
+		
+		.tam1 {width: 32px; height: 32px;}
+	</style>
+</head>
+
+<body data-ng-app="clientes">
+
+	<nav class="navbar navbar-inverse" role="navigation">
+	    <div class="navbar-header">
+	        <a class="navbar-brand" ui-sref="home0">Sistema</a>
+	    </div>
+	    <ul class="nav navbar-nav">
+	        <li><a href="home">Local</a></li>
+	        <li><a href="categorias.html">Categorias </a></li>
+	        <li><a href="multas.html">multas </a></li>
+	        <li><a href="avarias">Avarias </a></li>
+	        <li><a href="clientes.html">Clientes </a></li>
+	    </ul>
+	</nav>
+	
+	<div class="container">
+	
+		<div data-ng-controller="ctrl">
+	
+			<h2>Cadastrar clientes!</h2>
+	
+			<label>ID:</label>
+			<input type="text" ng-model="cliente.id" readonly="readonly"	style="background-color: #CCC" class="form-control" id="id" placeholder="id">
+			<label>Nome:</label>
+			<input type="text" ng-model="cliente.nome" class="form-control" id="id" placeholder="Nome">
+			<label>CPF:</label>
+			<input type="text" ng-model="cliente.cpf" class="form-control" id="id" placeholder="cpf">
+			<br/>
+			<input class="btn btn-primary" type="button" value="Novo" ng-click="novo();" /> <input
+				class="btn btn-primary" type="button" value="Salvar" ng-click="salvar();" /> <input
+				class="btn btn-primary" type="button" value="Deletar" ng-click="excluir(cliente);" />
+			<br />
+			<h2>clientes:</h2>
+			<p>
+				CPF  : <input class="form-control" type="text" ng-model="filtro" />
+			</p>
+			<div class="table-responsive">
+			<table class="table table-striped table-hover table-bordered table-condensed">
+				<thead>
+					<th ng-click="ordenar('id');"><a href="#">ID</a></th>
+					<th ng-click="ordenar('nome');"><a href="#">NOME</a></th>
+					<th>CPF</th>
+					<th>EDITAR</th>
+					<th>DELETAR</th>
+				</thead>
+				<tr ng-repeat="cliente in clientes | filter:filtro | orderBy: order">
+					<td ng-click="seleciona(cliente);"><a href="#">{{cliente.id}}</a></td>
+					<td>{{cliente.nome}}</td>
+					<td>{{cliente.cpf}}</td>
+					<td class="center" ng-click="seleciona(cliente);"><a href="#"><img
+							src="imgs/editar.png" width="32px" height="32px" /></a></td>
+					<td class="center" ng-click="excluir(cliente);"><a href="#"><img
+							src="imgs/apagar.png" width="32px" height="32px" /></a></td>
+				</tr>
+			</table>
+			</div>
+		</div>
+	</div>	
+</body>
+</html>

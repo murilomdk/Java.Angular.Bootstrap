@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Avarias</title>
+	<script src="js/angular.js"></script>
+	<script type="text/javascript" src="js/avarias.js"></script>
+	<link rel="stylesheet" href="css/estilos.css" />
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+	
+	<style type="text/css">
+		button {
+			width: 80px;
+		}
+		
+		input {
+			width: 100%; 
+		}
+		
+		.tam1 {width: 32px; height: 32px;}
+	</style>
+</head>
+
+<body data-ng-app="avarias">
+
+	<nav class="navbar navbar-inverse" role="navigation">
+	    <div class="navbar-header">
+	        <a class="navbar-brand" ui-sref="home0">Sistema</a>
+	    </div>
+	    <ul class="nav navbar-nav">
+	        <li><a href="home">Local</a></li>
+	        <li><a href="categorias.html">Categorias </a></li>
+	        <li><a href="multas.html">Multas </a></li>
+	        <li><a href="avarias.html">Avarias </a></li>
+	    </ul>
+	</nav>
+	
+	<div class="container">
+	
+		<div data-ng-controller="ctrl">
+	
+			<h2>Cadastrar avarias!</h2>
+	
+			<label>ID:</label>
+			<input type="text" ng-model="avaria.id" readonly="readonly"	style="background-color: #CCC" class="form-control" id="id" placeholder="id">
+			<label>Valor:</label>
+			<input type="text" ng-model="avaria.valor" class="form-control" id="id" placeholder="valor">
+			<label>Descricao:</label>
+			<input type="text" ng-model="avaria.descricao" class="form-control" id="id" placeholder="descricao">
+			<br/>
+			<input class="btn btn-primary" type="button" value="Novo" ng-click="novo();" /> <input
+				   class="btn btn-primary" type="button" value="Salvar" ng-click="salvar();" /> <input
+				   class="btn btn-primary" type="button" value="Deletar" ng-click="excluir(avaria);" />
+			<br />
+			<h2>avarias:</h2>
+			<p>
+				Descrição  : <input class="form-control" type="text" ng-model="filtro" />
+			</p>
+			<div class="table-responsive">
+			<table class="table table-striped table-hover table-bordered table-condensed">
+				<thead>
+					<th ng-click="ordenar('id');"><a href="#">ID</a></th>
+					<th ng-click="ordenar('valor');"><a href="#">PREÇO</a></th>
+					<th>DESCRIÇÃO</th>
+					<th>EDITAR</th>
+					<th>DELETAR</th>
+				</thead>
+				<tr ng-repeat="avaria in avarias | filter:filtro | orderBy: order">
+					<td ng-click="seleciona(avaria);"><a href="#">{{avaria.id}}</a></td>
+					<td>{{avaria.valor}}</td>
+					<td>{{avaria.descricao}}</td>
+					<td class="center" ng-click="seleciona(avaria);"><a href="#"><img
+							src="imgs/editar.png" width="32px" height="32px" /></a></td>
+					<td class="center" ng-click="excluir(avaria);"><a href="#"><img
+							src="imgs/apagar.png" width="32px" height="32px" /></a></td>
+				</tr>
+			</table>
+			</div>
+		</div>
+	</div>	
+</body>
+</html>	
